@@ -36,8 +36,29 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        myFirstTexturedSpriteNode.run(SKAction.move(to: CGPoint(x: myFirstSpriteNode.size.width, y: myFirstSpriteNode.size.height), duration: 2.0))
-        blueSprite.run(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 2.0))
+        /*
+        //myFirstTexturedSpriteNode.run(SKAction.move(to: CGPoint(x: myFirstSpriteNode.size.width, y: myFirstSpriteNode.size.height), duration: 2.0))
+        //blueSprite.run(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 2.0))
+        myFirstTexturedSpriteNode.run(SKAction.move(to: CGPoint(x: myFirstSpriteNode.size.width, y: myFirstSpriteNode.size.height), duration: 2.0)) {
+            //reset position
+            self.myFirstTexturedSpriteNode.position = CGPoint.zero
+        }
+        if !blueSprite.hasActions(){
+        //blueSprite.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 2.0)))
+            // at the same time
+        //blueSprite.run(SKAction.group([SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 2.0), SKAction.scale(by: 0.9, duration: 2.0)]))
+            // one action then the other
+            blueSprite.run(SKAction.sequence([SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 2.0), SKAction.scale(by: 0.9, duration: 2.0)]))
+        } else {
+            blueSprite.removeAllActions()
+        }
+         */
+        if let _ = myFirstTexturedSpriteNode.action(forKey: "Rotation") {
+            myFirstTexturedSpriteNode.removeAction(forKey: "Rotation")
+        } else {
+            myFirstTexturedSpriteNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 2.0)), withKey: "Rotation")
+        }
     }
+ 
     
 }
