@@ -30,8 +30,20 @@ class GameScene: SKScene {
         myFirstSpriteNode.addChild(myFirstTexturedSpriteNode)
         
         blueSprite.zPosition = 2
-        blueSprite.position = CGPoint(x: myFirstSpriteNode.size.width/2, y: myFirstSpriteNode.size.height/2)
+        blueSprite.position = CGPoint(x: myFirstSpriteNode.size.width/2, y: myFirstSpriteNode.size.height / 2)
         myFirstSpriteNode.addChild(blueSprite)
+        
+        physicsWorld.gravity = CGVector(dx: -1.0, dy: -2.0)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        
+        myFirstTexturedSpriteNode.physicsBody = SKPhysicsBody(circleOfRadius: myFirstTexturedSpriteNode.size.width / 2)
+        myFirstTexturedSpriteNode.physicsBody!.allowsRotation = false
+        //full energy bounce back
+        myFirstTexturedSpriteNode.physicsBody!.restitution = 1.0
+        
+        blueSprite.physicsBody = SKPhysicsBody(rectangleOf: blueSprite.size)
+        blueSprite.physicsBody!.restitution = 1.0
+        
         
     }
     
