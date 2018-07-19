@@ -10,6 +10,38 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    let dogSpriteNode = SKSpriteNode(imageNamed: "Run (1)")
+    var dogFrames = [SKTexture]()
+    
+    override func didMove(to view: SKView) {
+        dogSpriteNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(dogSpriteNode)
+        
+        let textureAtlas = SKTextureAtlas(named: "Dog Frames")
+        for index in 1..<textureAtlas.textureNames.count {
+            let textureName = "Run (" + String(index) + ")"
+            dogFrames.append(textureAtlas.textureNamed(textureName))
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let _ = dogSpriteNode.action(forKey: "Run"){
+//            dogSpriteNode.removeAction(forKey: "Run")
+//        } else {
+//        dogSpriteNode.run(SKAction.repeatForever(SKAction.animate(with: dogFrames, timePerFrame: 0.1)), withKey: "Run")
+//        }
+        //or
+        if !dogSpriteNode.hasActions() {
+             dogSpriteNode.run(SKAction.repeatForever(SKAction.animate(with: dogFrames, timePerFrame: 0.1)))
+        } else {
+            dogSpriteNode.removeAllActions()
+        }
+    }
+        
+    
+    
+    
+    /*
     let myFirstNode = SKNode()
     let myFirstSpriteNode = SKSpriteNode(color: UIColor.red, size: CGSize(width: 200.0, height: 200.0))
     let blueSprite = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 100.0, height: 100.0))
@@ -71,6 +103,6 @@ class GameScene: SKScene {
             myFirstTexturedSpriteNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 2.0)), withKey: "Rotation")
         }
     }
- 
+ */
     
 }
